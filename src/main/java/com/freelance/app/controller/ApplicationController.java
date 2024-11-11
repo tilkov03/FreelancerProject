@@ -60,4 +60,23 @@ public class ApplicationController {
 
         return applicationRepository.findByJobId(jobId);
     }
+    // Метод за промяна на статуса на кандидатурата
+    @PutMapping("/{applicationId}/status")
+    public String updateApplicationStatus(@PathVariable Long applicationId, @RequestParam Long userId, @RequestParam ApplicationStatus status) {
+        var user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        var application = applicationRepository.findById(applicationId).orElseThrow(() -> new RuntimeException("Application not found"));
+
+        // Check if user is the employer of the job associated with this application
+        var job = jobRepository.findById(application.getJobId()).orElseThrow(() -> new RuntimeException("Job not found"));
+        if (!user.getRole().equals(Role.EMPLOYER) || !job.getUserId().equals(userId)) {
+            throw new RuntimeException("Only the employer can update the application status.");
+        }
+
+        application.setStatus(status);
+        applicationRepository.save(application);
+        return "Application status updated successfully.";
+    }
+
+
+
 }
