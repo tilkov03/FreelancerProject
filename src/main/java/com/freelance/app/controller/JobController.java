@@ -1,9 +1,12 @@
 package com.freelance.app.controller;
 
+import com.freelance.app.model.Category;
 import com.freelance.app.model.Job;
+import com.freelance.app.repository.CategoryRepository;
 import com.freelance.app.repository.JobRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -60,5 +63,6 @@ public class JobController {
 
         jobRepository.delete(job);
     }
+
 
 }

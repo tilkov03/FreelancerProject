@@ -76,7 +76,12 @@ public class ApplicationController {
         applicationRepository.save(application);
         return "Application status updated successfully.";
     }
-
+    //Метод за извеждане на всички обяви за работодател по ид
+    @GetMapping("/employer/{userId}")
+    public List<Application> getApplicationsByEmployer(@PathVariable Long userId) {
+        // Use custom query to find all applications for jobs posted by a specific employer
+        return applicationRepository.findApplicationsByEmployer(userId);
+    }
 
 
 }

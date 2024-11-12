@@ -36,7 +36,7 @@ public class User {
     )
     private Set<Skill> skills = new HashSet<>();
 
-    // Гетъри и сетъри
+    // Getters and setters
     public Long getId() {
         return id;
     }

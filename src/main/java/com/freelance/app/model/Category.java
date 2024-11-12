@@ -1,5 +1,6 @@
 package com.freelance.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +16,7 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category")
+    @JsonIgnore
     private Set<Job> jobs = new HashSet<>();
 
     // Гетъри и сетъри
